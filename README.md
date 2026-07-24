@@ -1,6 +1,6 @@
 # From PDF to retrieved chunk: testing a RAGFlow ingestion pipeline
 
-Whether merged tables, cross-page notes, page breaks and flow charts survive
+Whether merged tables, cross-page footnotes, page breaks and flow charts survive
 from PDF to retrieved chunk. Tested end to end through MinerU parsing, a custom
 linking step, and RAGFlow chunking, embedding and retrieval.
 
@@ -11,21 +11,28 @@ linking step, and RAGFlow chunking, embedding and retrieval.
 | Problem | Result | What happened |
 |---|---|---|
 | Tables with merged cells | Held | Four full-width rows and seven cells spanning 2 to 4 rows kept their `colspan` and `rowspan` |
-| Remarks and notes whose text sits pages away | Held, with a custom step | 13 markers resolved, every one across a page boundary, none unresolved. Needs a step RAGFlow does not provide |
+| Remarks and footnotes across pages | Held, with a custom step | 13 references resolved, every one across a page boundary, none unresolved. Needs a step RAGFlow does not provide |
 | Page breaks | Held | A paragraph and a table each split across pages came back whole. Repeated headers and page numbers typed separately |
 | Flow charts | Extracted, retrieval not tested | Came out as an image object with its caption. The vector is built from the caption, not the picture |
+
+## Two constraints that decide how it has to be deployed
+
+| Constraint | What it means |
+|---|---|
+| The linking step needs self-hosted RAGFlow | The hosted ingestion pipeline is four fixed component types with no code component and no external call component, so a deterministic custom stage has nowhere to run. Building from source is a documented mode and gives the filesystem access the step needs. Parsing, chunking, embedding and retrieval work either way |
+| Multimodal embedding is not available, whichever model is chosen | RAGFlow sends an image to a vision model and embeds the description it gets back. The picture is stored and returned with the chunk, but the vector is built from the caption. Selecting a multimodal embedding model does not change this |
 
 ## What it comes down to
 
 The only gap is deterministic rather than a model problem: everything except the
-connection between a marker and its note is handled by parsing and by RAGFlow, and
-that connection is about thirty lines of rule-based code.
+footnote connection is handled by parsing and by RAGFlow, and the connection itself
+is about thirty lines of rule-based code.
 
-A note on terminology: this document uses end-notes, not footnotes. A **reference**
-is a parenthesised number at the end of a table cell, such as `... building services
-(4)`. A **definition** is the text item opening `Note (4) :` in the Notes section.
-No superscript markup appears anywhere in the parse, so the script's superscript
-path, which handles true footnotes, was never exercised.
+This first case covers footnotes whose definitions are collected in a Notes section
+on a later page. A **reference** is the parenthesised number at the end of a table
+cell, such as `... building services (4)`; a **definition** is the text item opening
+`Note (4) :`. Footnotes set at the foot of the citing page, which MinerU marks with
+`<sup>`, are the next case to run, and the script already carries that path.
 
 The gain is what a single chunk is sufficient for, not the ranking. Of the nine
 results returned across both retrieval tests, exactly one contains the table row and
