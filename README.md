@@ -1,36 +1,31 @@
 # From PDF to retrieved chunk: testing a RAGFlow ingestion pipeline
 
-Four stages tested end to end on a 5-page document: MinerU parsing, a custom
-footnote-linking step, RAGFlow chunking, and RAGFlow embedding and retrieval. The
-question is whether a footnote printed pages away from the table that cites it can
-be kept with that table all the way into a retrieved chunk.
+Whether merged tables, cross-page footnotes, page breaks and flow charts survive
+from PDF to retrieved chunk. Tested end to end through MinerU parsing, a custom
+linking step, and RAGFlow chunking, embedding and retrieval.
 
 **[Read the walkthrough](https://henryhyw.github.io/ragflow-pipeline-test/)**
 
-## What is being tested
+## What was tested
 
-The document was written to contain six things a pipeline has to survive:
+| Problem | Result | What happened |
+|---|---|---|
+| Tables with merged cells | Held | Four full-width rows and seven cells spanning 2 to 4 rows kept their `colspan` and `rowspan` |
+| Nested tables | **Not tested** | The test document has no table inside a table cell |
+| Remarks and footnotes across pages | Held, with a custom step | 13 references resolved, every one across a page boundary, none unresolved. Needs a step RAGFlow does not provide |
+| Page breaks | Held | A paragraph and a table each split across pages came back whole. Repeated headers and page numbers typed separately |
+| Flow charts | Extracted, retrieval not tested | Came out as an image object with its caption. The vector is built from the caption, not the picture |
 
-| Test | Where it is |
-|---|---|
-| Merged cells | Four full-width section rows, seven cells spanning 2 to 4 rows |
-| A table split across a page break | Table 1 runs from page 2 to page 3 |
-| A footnote whose definition is pages away | 13 references on pages 2 and 3, all 10 definitions on page 4 |
-| A paragraph split across a page break | Section 2, across pages 1 and 2 |
-| Page furniture | Running header and page number on all 5 pages |
-| A flowchart | Figure 1 on page 5, with labels that exist only as pixels |
+## What it comes down to
 
-## Result
+The only gap is deterministic rather than a model problem: everything except the
+footnote connection is handled by parsing and by RAGFlow, and the connection itself
+is about thirty lines of rule-based code.
 
-Parsing kept the merged cells, joined the two halves of the table, rejoined the split
-paragraph, labelled the furniture separately, and extracted the figure. The linking
-step resolved all 13 references, every one of them across a page boundary, with none
-left unresolved.
-
-The same parse was then rendered twice, once with the linking applied and once
-without, and both were uploaded to the same knowledge base. Of the nine chunks
-returned across both retrieval tests, one contains the table row and the condition
-that governs it together, and it is the top hit in the linked base.
+The gain is what a single chunk is sufficient for, not the ranking. Of the nine
+results returned across both retrieval tests, exactly one contains the table row and
+the condition that governs it, and it is the top hit after linking. The ranking gain
+alone is 1.63 points.
 
 ## Contents
 
