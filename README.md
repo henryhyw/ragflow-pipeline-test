@@ -1,8 +1,9 @@
-# Document to chunks: a RAGFlow pipeline test
+# From PDF to retrieved chunk: testing a RAGFlow ingestion pipeline
 
-A 5-page document taken through parsing, footnote linking, chunking and retrieval,
-to see whether a footnote printed pages away from the table that cites it can be
-kept with that table all the way into a retrieved chunk.
+Four stages tested end to end on a 5-page document: MinerU parsing, a custom
+footnote-linking step, RAGFlow chunking, and RAGFlow embedding and retrieval. The
+question is whether a footnote printed pages away from the table that cites it can
+be kept with that table all the way into a retrieved chunk.
 
 **[Read the walkthrough](https://henryhyw.github.io/ragflow-pipeline-test/)**
 
