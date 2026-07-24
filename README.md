@@ -10,9 +10,9 @@ linking step, and RAGFlow chunking, embedding and retrieval.
 
 | Problem | Result | What happened |
 |---|---|---|
-| Tables with merged cells | Held | Four full-width rows and seven cells spanning 2 to 4 rows kept their `colspan` and `rowspan` |
-| Remarks and footnotes across pages | Held, with a custom step | 13 references resolved, every one across a page boundary, none unresolved. Needs a step RAGFlow does not provide |
-| Page breaks | Held | A paragraph and a table each split across pages came back whole. Repeated headers and page numbers typed separately |
+| Tables with merged cells | Worked | Four full-width rows and seven cells spanning 2 to 4 rows kept their `colspan` and `rowspan` |
+| Remarks and footnotes across pages | Worked, with one custom step | 13 references resolved, every one across a page boundary, none unresolved. Needs a step RAGFlow does not provide |
+| Page breaks | Worked | A paragraph and a table each split across pages came back whole. Repeated headers and page numbers typed separately |
 | Flow charts | Extracted, retrieval not tested | Came out as an image object with its caption. The vector is built from the caption, not the picture |
 
 ## Two constraints that decide how it has to be deployed
@@ -28,11 +28,11 @@ The only gap is deterministic rather than a model problem: everything except the
 footnote connection is handled by parsing and by RAGFlow, and the connection itself
 is about thirty lines of rule-based code.
 
-This first case covers footnotes whose definitions are collected in a Notes section
-on a later page. A **reference** is the parenthesised number at the end of a table
-cell, such as `... building services (4)`; a **definition** is the text item opening
-`Note (4) :`. Footnotes set at the foot of the citing page, which MinerU marks with
-`<sup>`, are the next case to run, and the script already carries that path.
+This document uses remarks, whose text is collected in a Notes section on a later
+page. A **reference** is the parenthesised number at the end of a table cell, such as
+`... building services (4)`; a **definition** is the text item opening `Note (4) :`.
+Footnotes printed at the foot of the citing page, which MinerU marks with `<sup>`,
+are matched the same way, and the script already carries that path.
 
 The gain is what a single chunk is sufficient for, not the ranking. Of the nine
 results returned across both retrieval tests, exactly one contains the table row and
