@@ -1,0 +1,131 @@
+{
+  "source": "mineru_demo/demo_pipeline_test_doc/txt/demo_pipeline_test_doc_content_list.json",
+  "pages": 5,
+  "tables": 2,
+  "images": 1,
+  "references": 13,
+  "definitions": 10,
+  "linked": 13,
+  "cross_page": 13,
+  "distinct_notes_attached": 10,
+  "unresolved": [],
+  "links": [
+    {
+      "number": 1,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "The exclusion applies only where the chamber is provided at ground level and is accessible directly from a service lane or an off-street loading area.",
+      "id": "fn-p4-1"
+    },
+    {
+      "number": 2,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "The exclusion includes the lift machine room, the lift overrun and the associated ventilation plenum, but excludes any part of the enclosure that is used for storage or that houses equipment unrelated to the lift installation.",
+      "id": "fn-p4-2"
+    },
+    {
+      "number": 3,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "A pipe duct qualifies where it serves rainwater drainage, soil and waste disposal, or forms part of the distribution network of a mandatory plant room. A duct serving a single tenanted unit does not qualify.",
+      "id": "fn-p4-3"
+    },
+    {
+      "number": 4,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "The plant rooms exempted under this item are the hot water boiler room, the filtration plant room serving a swimming pool, and the satellite master antenna television room.",
+      "id": "fn-p4-4"
+    },
+    {
+      "number": 5,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "The exclusion is granted only where the harvested or recycled water is reticulated to at least two separate end uses within the development, and where the battery room is separated from occupied accommodation by a fire barrier of not less than two hours.",
+      "id": "fn-p4-5"
+    },
+    {
+      "number": 5,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "The exclusion is granted only where the harvested or recycled water is reticulated to at least two separate end uses within the development, and where the battery room is separated from occupied accommodation by a fire barrier of not less than two hours.",
+      "id": "fn-p4-5"
+    },
+    {
+      "number": 6,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "The sky garden shall be open to the sky over at least half its area and shall be accessible to all residents without charge. A walkway qualifies only where it is the sole means of access to the garden.",
+      "id": "fn-p4-6"
+    },
+    {
+      "number": 7,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "High headroom and void includes the void in front of a cinema screen, a theatre balcony, a banking hall, a shopping arcade, an auditorium and a sports hall.",
+      "id": "fn-p4-7"
+    },
+    {
+      "number": 8,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "Where the headroom exceeds 4.5 m only over part of the bay, the exclusion is limited to that part, measured on plan.",
+      "id": "fn-p4-8"
+    },
+    {
+      "number": 8,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "Where the headroom exceeds 4.5 m only over part of the bay, the exclusion is limited to that part, measured on plan.",
+      "id": "fn-p4-8"
+    },
+    {
+      "number": 9,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "The smoke lobby qualifies only where it is provided in accordance with the code of practice for fire safety and is not used for any other purpose. A lobby that also serves a passenger lift does not qualify.",
+      "id": "fn-p4-9"
+    },
+    {
+      "number": 10,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "The exclusion applies only where the room is handed over to the utility undertaking or to the management body on completion, and where no part of it is let for commercial storage.",
+      "id": "fn-p4-10"
+    },
+    {
+      "number": 10,
+      "ref_item": 12,
+      "ref_page": 1,
+      "def_page": 3,
+      "span_pages": 2,
+      "text": "The exclusion applies only where the room is handed over to the utility undertaking or to the management body on completion, and where no part of it is let for commercial storage.",
+      "id": "fn-p4-10"
+    }
+  ]
+}
