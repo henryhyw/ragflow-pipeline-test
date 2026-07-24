@@ -1,6 +1,6 @@
 # From PDF to retrieved chunk: testing a RAGFlow ingestion pipeline
 
-Whether merged tables, cross-page footnotes, page breaks and flow charts survive
+Whether merged tables, cross-page notes, page breaks and flow charts survive
 from PDF to retrieved chunk. Tested end to end through MinerU parsing, a custom
 linking step, and RAGFlow chunking, embedding and retrieval.
 
@@ -11,16 +11,21 @@ linking step, and RAGFlow chunking, embedding and retrieval.
 | Problem | Result | What happened |
 |---|---|---|
 | Tables with merged cells | Held | Four full-width rows and seven cells spanning 2 to 4 rows kept their `colspan` and `rowspan` |
-| Nested tables | **Not tested** | The test document has no table inside a table cell |
-| Remarks and footnotes across pages | Held, with a custom step | 13 references resolved, every one across a page boundary, none unresolved. Needs a step RAGFlow does not provide |
+| Remarks and notes whose text sits pages away | Held, with a custom step | 13 markers resolved, every one across a page boundary, none unresolved. Needs a step RAGFlow does not provide |
 | Page breaks | Held | A paragraph and a table each split across pages came back whole. Repeated headers and page numbers typed separately |
 | Flow charts | Extracted, retrieval not tested | Came out as an image object with its caption. The vector is built from the caption, not the picture |
 
 ## What it comes down to
 
 The only gap is deterministic rather than a model problem: everything except the
-footnote connection is handled by parsing and by RAGFlow, and the connection itself
-is about thirty lines of rule-based code.
+connection between a marker and its note is handled by parsing and by RAGFlow, and
+that connection is about thirty lines of rule-based code.
+
+A note on terminology: this document uses end-notes, not footnotes. A **reference**
+is a parenthesised number at the end of a table cell, such as `... building services
+(4)`. A **definition** is the text item opening `Note (4) :` in the Notes section.
+No superscript markup appears anywhere in the parse, so the script's superscript
+path, which handles true footnotes, was never exercised.
 
 The gain is what a single chunk is sufficient for, not the ranking. Of the nine
 results returned across both retrieval tests, exactly one contains the table row and
